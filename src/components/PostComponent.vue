@@ -11,6 +11,22 @@
       <p class="date">{{ 포스트.date }}</p>
     </div>
   </div>
+
+<!-- 
+  컨테이너 컴포넌트에서 반복문을 돌렸을 때 post
+  <div class="post">
+    <div class="post-header">
+      <div class="profile" :style="{ backgroundImage: `url(${게시물.userImage})`}"></div>
+      <span class="profile-name">{{ 게시물.name }}</span>
+    </div>
+    <div class="post-body" :style="{ backgroundImage: `url(${게시물.postImage})` }"></div>
+    <div class="post-content">
+      <p>{{ 게시물.likes }} Likes</p>
+      <p><strong>{{ 게시물.filter }}</strong> {{ 게시물.content }}</p>
+      <p class="date">{{ 게시물.date }}</p>
+    </div>
+  </div>
+-->
 </template>
 
 <script>

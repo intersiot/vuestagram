@@ -1,2 +1,2 @@
-# vuestargram
+# vuestagram
 vue study 3

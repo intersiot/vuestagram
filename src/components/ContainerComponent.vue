@@ -1,6 +1,8 @@
 <template>
   <div>
-    <Post :게시물="게시물" />
+    <div v-if="step == 0">
+      <Post :게시물="게시물" />
+    </div>
     <!--
       반복문 쓰는 방법.
       나는 그냥 Post에서 했는데 여기서 해도됨 
@@ -14,19 +16,23 @@
     <!-- <Post :게시물="게시물[i]" v-for="(a, i) in 게시물" :key="i" /> -->
 
     <!-- 필터선택페이지 -->
-    <div class="upload-image"></div>
-    <div class="filters">
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
+    <div v-if="step == 1">
+      <div class="upload-image"></div>
+      <div class="filters">
+        <div class="filter-1"></div>
+        <div class="filter-1"></div>
+        <div class="filter-1"></div>
+        <div class="filter-1"></div>
+        <div class="filter-1"></div>
+      </div>
     </div>
 
     <!-- 글작성페이지 -->
-    <div class="upload-image"></div>
-    <div class="write">
-      <textarea class="write-box">write!</textarea>
+    <div v-if="step == 2">
+      <div class="upload-image"></div>
+      <div class="write">
+        <textarea class="write-box">write!</textarea>
+      </div>
     </div>
   </div>
 </template>
@@ -37,6 +43,7 @@ import Post from './PostComponent.vue'
 export default {
   name: 'ContainerComponent',
   props: {
+    step: Number,
     게시물: Array,
   },
   components: {

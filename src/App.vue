@@ -11,27 +11,56 @@
 
   <Container :게시물="게시물" />
 
+  <button @click="more">더보기</button>
+
   <div class="footer">
     <ul class="footer-button-plus">
       <input type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
     </ul>
  </div>
+
+ <div v-if="step == 0">내용0</div>
+ <div v-if="step == 1">내용1</div>
+ <div v-if="step == 2">내용2</div>
+ <button @click="step = 0">버튼0</button>
+ <button @click="step = 1">버튼1</button>
+ <button @click="step = 2">버튼2</button>
+ 
 </template>
 
 <script>
 import Container from './components/ContainerComponent.vue'
 import post from './assets/post'
+import axios from 'axios' // axios로 ajax 요청하는 법
+// axios.get() // 내가 원하는 url로 get요청할 수 있음
 
 export default {
   name: "App",
   data() {
     return {
+      step: 0, // 0이면 내용 0을 보여주고 1이면 내용 1을 보여줌
       게시물: post,
+      더보기: 0,
     }
   },
   components: {
     Container,
+  },
+  methods: {
+    more() {
+      // axios 사용법 더 알아보자면
+      // axios.post('URL', {name: 'kim'}) // URL로 내가 원하는 정보를 보낼 때 사용
+      // .then() // 요청이 성공했을 때 실행할 코드
+      // .catch((err) => { err.message }) // 요청이 실패했을 때 실행할 코드
+      // axios.get('URL').then(get요청이성공했을때실행)
+      axios.get(`https://codingapple1.github.io/vue/more${this.더보기}.json`)
+      .then((결과) => {
+        console.log(결과.data);
+        this.게시물.push(결과.data); // array에 데이터를 추가함
+        this.더보기++;
+      })
+    },
   },
 };
 </script>

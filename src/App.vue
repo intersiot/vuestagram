@@ -1,21 +1,27 @@
 <template>
   <div class="header">
     <ul class="header-button-left">
-      <li>Cancel</li>
+      <li v-if="step != 0" @click="step--">Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li v-if="step == 1" @click="step++">Next</li>
+      <li v-if="step == 2" @click="Publish">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :게시물="게시물" :step="step" />
+  <Container 
+    :게시물="게시물" 
+    :step="step" 
+    :이미지url="이미지url" 
+    @write="작성한글 = $event"
+  />
 
   <button @click="more">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input @change="upload" type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
     </ul>
  </div>
@@ -39,9 +45,11 @@ export default {
   name: "App",
   data() {
     return {
+      작성한글: '',
+      이미지url: '', // url 변수 등록
       step: 0, // App.vue에 현재 페이지 상태를 저장함
       // step: 0, // 0이면 내용 0을 보여주고 1이면 내용 1을 보여줌
-      게시물: post,
+      게시물: post, // 글 발행 기능 만들기 -> <Post />를 하나 더 만들려면? 데이터만 건들면 된다.
       더보기: 0,
     }
   },
@@ -49,6 +57,20 @@ export default {
     Container,
   },
   methods: {
+    Publish() { // 발행버튼 누르면? this.게시물에 { 내가쓴거 } 밀어넣기
+      var 내게시물 = {
+        name: "Kim Hyun",
+        userImage: "https://placeimg.com/100/100/arch",
+        postImage: this.이미지url,
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: this.작성한글,
+        filter: "perpetua"
+      };
+      this.게시물.unshift(내게시물); // 왼쪽의 array에 자료를 집어넣어줌
+      this.step = 0; // 메인페이지로 돌아감
+    },
     more() {
       // axios 사용법 더 알아보자면
       // axios.post('URL', {name: 'kim'}) // URL로 내가 원하는 정보를 보낼 때 사용
@@ -61,6 +83,16 @@ export default {
         this.게시물.push(결과.data); // array에 데이터를 추가함
         this.더보기++;
       })
+    },
+    upload(e) {
+      let 파일 = e.target.files;
+      // console.log(파일[0]);
+      // 업로드 후엔 다음 페이지로 보내야 함
+      let url = URL.createObjectURL(파일[0]); 
+      console.log(url);
+      this.이미지url = url; // 데이터로 등록한 이미지url에 경로데이터를 넣음
+      this.step = 1;
+      // 업로드한 이미지를 띄워야 함
     },
   },
 };

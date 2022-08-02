@@ -9,7 +9,7 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :게시물="게시물" />
+  <Container :게시물="게시물" :step="step" />
 
   <button @click="more">더보기</button>
 
@@ -20,12 +20,12 @@
     </ul>
  </div>
 
- <div v-if="step == 0">내용0</div>
+ <!-- <div v-if="step == 0">내용0</div>
  <div v-if="step == 1">내용1</div>
  <div v-if="step == 2">내용2</div>
  <button @click="step = 0">버튼0</button>
  <button @click="step = 1">버튼1</button>
- <button @click="step = 2">버튼2</button>
+ <button @click="step = 2">버튼2</button> -->
  
 </template>
 
@@ -39,7 +39,8 @@ export default {
   name: "App",
   data() {
     return {
-      step: 0, // 0이면 내용 0을 보여주고 1이면 내용 1을 보여줌
+      step: 0, // App.vue에 현재 페이지 상태를 저장함
+      // step: 0, // 0이면 내용 0을 보여주고 1이면 내용 1을 보여줌
       게시물: post,
       더보기: 0,
     }

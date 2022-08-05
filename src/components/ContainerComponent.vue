@@ -19,10 +19,9 @@
     <div v-if="step == 1">
       <div class="upload-image" :style="`background-image: url(${이미지url})`"></div>
       <div class="filters">
-        <FilterBox 
-        :필터="필터" 
-        :이미지="이미지url" 
-        v-for="(필터, i) in 필터들" :key="i">{{ 필터 }}</FilterBox>
+        <FilterBox :필터="필터" :이미지="이미지url" v-for="(필터, i) in 필터들" :key="i">
+          {{ 필터 }}
+        </FilterBox>
       </div>
     </div>
 

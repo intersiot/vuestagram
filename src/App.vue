@@ -17,7 +17,7 @@
     @write="작성한글 = $event"
   />
 
-  <button @click="more">더보기</button>
+  <button v-if="step == 0" @click="more">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">

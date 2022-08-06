@@ -19,7 +19,7 @@
 
   <button v-if="step == 0" @click="more">더보기</button>
 
-  <div class="footer">
+  <div v-if="step == 0" class="footer">
     <ul class="footer-button-plus">
       <input @change="upload" type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
@@ -52,6 +52,12 @@ export default {
       게시물: post, // 글 발행 기능 만들기 -> <Post />를 하나 더 만들려면? 데이터만 건들면 된다.
       더보기: 0,
     }
+  },
+  mounted() {
+    this.emitter.on('작명', (a) => { // 누가 '작명'이란 이벤트 발사하면
+      // 이 코드 실행해주셈
+      console.log(a)
+    })
   },
   components: {
     Container,

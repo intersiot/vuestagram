@@ -17,7 +17,7 @@
 
     <!-- 필터선택페이지 -->
     <div v-if="step == 1">
-      <div class="upload-image" :style="`background-image: url(${이미지url})`"></div>
+      <div :class="선택한필터" class="upload-image" :style="`background-image: url(${이미지url})`"></div>
       <div class="filters">
         <FilterBox :필터="필터" :이미지="이미지url" v-for="(필터, i) in 필터들" :key="i">
           {{ 필터 }}
@@ -27,7 +27,7 @@
 
     <!-- 글작성페이지 -->
     <div v-if="step == 2">
-      <div class="upload-image" :style="`background-image: url(${이미지url})`"></div>
+      <div :class="선택한필터" class="upload-image" :style="`background-image: url(${이미지url})`"></div>
       <div class="write">
         <textarea @input="$emit('write', $event.target.value)" class="write-box">write!</textarea>
       </div>
@@ -46,6 +46,7 @@ export default {
       필터들: [ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", 
 "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", 
 "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"],
+      선택한필터: '',
     }
   },
   props: {
@@ -53,10 +54,16 @@ export default {
     step: Number,
     게시물: Array,
   },
+  mounted() {
+    this.emitter.on('박스클릭함', (a) => { // 누가 '작명'이란 이벤트 발사하면
+      // 이 코드 실행해주셈
+      this.선택한필터 = a
+    })
+  },
   components: {
     Post,
     FilterBox,
-  }
+  },
 }
 </script>
 

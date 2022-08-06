@@ -7,6 +7,11 @@
       slot은 HTML 태그 안에 데이터바인딩할 때만 slot을 사용한다.
       -->
     <slot></slot> <!-- 1. 구멍 뚫기 -->
+    <!-- mitt로 데이터 전송하는 법
+      1. this.emitter.emit() 으로 발사하고
+      2. this.emitter.on() 으로 수신하면 됨 -> 수신하는 코드는 mounted 안에 작성하는 게 관습적임
+     -->
+    <button @click="fire">버튼</button>
   </div> 
   <!-- <div :class="필터 + ` filter-item`" :style="`background-image: url(${이미지}) `"></div>  -->
   <!-- <div :class="`${필터} filter-item`" :style="`background-image: url(${이미지}) `"></div>  -->
@@ -18,7 +23,18 @@ export default {
   props: {
     이미지: String,
     필터: String,
-  }
+  },
+  methods: {
+    fire() {
+      this.emitter.emit('작명', '데이터'); // 이벤트 쏴주는 법
+    }
+  },
+  mounted() {
+    this.emitter.on('작명', (a) => { // 누가 '작명'이란 이벤트 발사하면
+      // 이 코드 실행해주셈
+      console.log(a)
+    })
+  },
 }
 </script>
 

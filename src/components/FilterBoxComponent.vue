@@ -10,7 +10,7 @@
     <!-- 
       mitt로 데이터 전송하는 법
       1. this.emitter.emit() 으로 발사하고
-      2. this.emitter.on() 으로 수신하면 됨 -> 수신하는 코드는 mounted 안에 작성하는 게 관습적임
+      2. this.emitter.on() 으로 수신하면 됨 -> 수신하는 코드는 수신하고자 하는 컴포넌트의 mounted 안에 작성하는 게 관습적임
      -->
     <button @click="fire">버튼</button>
   </div> 
@@ -29,12 +29,6 @@ export default {
     fire() {
       this.emitter.emit('작명', '데이터'); // 이벤트 쏴주는 법
     }
-  },
-  mounted() {
-    this.emitter.on('작명', (a) => { // 누가 '작명'이란 이벤트 발사하면
-      // 이 코드 실행해주셈
-      console.log(a)
-    })
   },
 }
 </script>

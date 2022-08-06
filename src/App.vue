@@ -45,6 +45,7 @@ export default {
   name: "App",
   data() {
     return {
+      선택한필터: '',
       작성한글: '',
       이미지url: '', // url 변수 등록
       step: 0, // App.vue에 현재 페이지 상태를 저장함
@@ -54,9 +55,13 @@ export default {
     }
   },
   mounted() {
-    this.emitter.on('작명', (a) => { // 누가 '작명'이란 이벤트 발사하면
+    // this.emitter.on('작명', (a) => { // 누가 '작명'이란 이벤트 발사하면
+    //   // 이 코드 실행해주셈
+    //   console.log(a)
+    // })
+    this.emitter.on('박스클릭함', (a) => { // 누가 '작명'이란 이벤트 발사하면
       // 이 코드 실행해주셈
-      console.log(a)
+      this.선택한필터 = a
     })
   },
   components: {
@@ -72,7 +77,8 @@ export default {
         date: "May 15",
         liked: false,
         content: this.작성한글,
-        filter: "perpetua"
+        // filter: "perpetua"
+        filter: this.선택한필터
       };
       this.게시물.unshift(내게시물); // 왼쪽의 array에 자료를 집어넣어줌
       this.step = 0; // 메인페이지로 돌아감

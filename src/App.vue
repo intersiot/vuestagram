@@ -10,6 +10,9 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
+  <h4>안녕 {{ $store.state.name }}</h4> <!-- store.js에 있는 state 꺼내쓰는 방법 -->
+  <button @click="$store.state.name = '박' ">버튼</button> <!-- 이렇게 직접 수정하면 안됨! -->
+
   <Container 
     :게시물="게시물" 
     :step="step" 

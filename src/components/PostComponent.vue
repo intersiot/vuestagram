@@ -4,9 +4,12 @@
       <div class="profile" :style="{ backgroundImage: `url(${포스트.userImage})`}"></div>
       <span class="profile-name">{{ 포스트.name }}</span>
     </div>
-    <div :class="포스트.filter" class="post-body" :style="{ backgroundImage: `url(${포스트.postImage})` }"></div>
+    <div @click="$store.commit('UpLike')" 
+    :class="포스트.filter" class="post-body" 
+    :style="{ backgroundImage: `url(${포스트.postImage})` }"></div>
     <div class="post-content">
-      <p>{{ 포스트.likes }} Likes</p>
+      <!-- <p>{{ 포스트.likes }} Likes</p> -->
+      <button @click="$store.commit('UpLike')">좋아요</button> <span>{{ $store.state.likes }} Likes</span>
       <p><strong>{{ 포스트.filter }}</strong> {{ 포스트.content }}</p>
       <p class="date">{{ 포스트.date }}</p>
     </div>

@@ -1,6 +1,5 @@
 import { createStore } from 'vuex'
-import post from './assets/post.js'
-let data = post();
+// import post from './assets/post.js'
 
 // 버튼을 누르면 state => 'park'로 바꿔보자.
 // 1. store.js에 state 수정방법 정의
@@ -11,12 +10,19 @@ const store = createStore({
     return { // 데이터 보관하고 싶으면 여기에 하셈 -> 데이터말고 state라고 할거임
       name: 'kim',
       age: 20,
-      likes: data.likes, // 좋아요 갯수 -> post를 import하는 방법이 뭔가 잘못됨..
+      likes: 30,
+      liked: false,
     }
   },
   mutations: { // state 수정방법 정의하는 곳임
     UpLike(state) {
-      state.likes++
+      if (state.liked == false) {
+        state.likes++;
+        state.liked = true;
+      } else {
+        state.likes--;
+        state.liked = false;
+      }
     },
     // 나이먹기(state) {
     //   state.age++

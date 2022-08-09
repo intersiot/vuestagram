@@ -10,13 +10,21 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <h4>안녕 {{ $store.state.name }}</h4> <!-- store.js에 있는 state 꺼내쓰는 방법 -->
-  <!-- <button @click="$store.state.name = '박' ">버튼</button> 이렇게 직접 수정하면 안됨! store.js에 부탁할거임 -->
+<!--
+  <h4>안녕 {{ $store.state.name }}</h4> store.js에 있는 state 꺼내쓰는 방법
+  <button @click="$store.state.name = '박' ">버튼</button> 이렇게 직접 수정하면 안됨! store.js에 부탁할거임
   <button @click="$store.commit('이름변경')">버튼</button>
   <h4>나이는 {{ $store.state.age }}</h4>
   <button @click="$store.commit('나이먹기')">버튼2</button>
-  <!-- 10씩 증가시키고 싶다면? -->
-  <button @click="$store.commit('나이십씩먹기', 10)">버튼3</button>
+  <button @click="$store.commit('나이십씩먹기', 10)">버튼3</button> 10씩 증가시키고 싶다면?
+-->
+
+  <!-- 더보기게시물 ajax 요청하려면?
+    commit은 mutations 부탁
+    dispatch는 actions 부탁
+   -->
+  <!-- <p>{{ $store.state.more }}</p>
+  <button @click="$store.dispatch('getData')">더보기버튼</button> -->
 
   <Container 
     :게시물="게시물" 

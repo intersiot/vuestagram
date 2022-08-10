@@ -1,5 +1,5 @@
 <template>
-  <div class="post" v-for="(포스트, i) in 게시물" :key="i">
+  <!-- <div class="post" v-for="(포스트, i) in 게시물" :key="i">
     <div class="post-header">
       <div class="profile" :style="{ backgroundImage: `url(${포스트.userImage})`}"></div>
       <span class="profile-name">{{ 포스트.name }}</span>
@@ -8,35 +8,35 @@
       :class="포스트.filter" class="post-body" 
       :style="{ backgroundImage: `url(${포스트.postImage})` }"></div>
     <div class="post-content">
-      <!-- <p>{{ 포스트.likes }} Likes</p> -->
+      <p>{{ 포스트.likes }} Likes</p>
       <p>{{ $store.state.likes }} Likes</p>
       <p><strong>{{ 포스트.filter }}</strong> {{ 포스트.content }}</p>
       <p class="date">{{ 포스트.date }}</p>
     </div>
-  </div>
+  </div> -->
 
-<!-- 
-  컨테이너 컴포넌트에서 반복문을 돌렸을 때 post
+  <!-- 컨테이너 컴포넌트에서 반복문을 돌렸을 때 post -->
   <div class="post">
     <div class="post-header">
       <div class="profile" :style="{ backgroundImage: `url(${게시물.userImage})`}"></div>
       <span class="profile-name">{{ 게시물.name }}</span>
     </div>
-    <div class="post-body" :style="{ backgroundImage: `url(${게시물.postImage})` }"></div>
+    <div @click="$store.commit('UpLike', i)" class="post-body" :style="{ backgroundImage: `url(${게시물.postImage})` }"></div>
     <div class="post-content">
       <p>{{ 게시물.likes }} Likes</p>
       <p><strong>{{ 게시물.filter }}</strong> {{ 게시물.content }}</p>
       <p class="date">{{ 게시물.date }}</p>
     </div>
   </div>
--->
+
 </template>
 
 <script>
 export default {
   name: 'PostComponent',
   props: {
-    게시물: Array,
+    게시물: Object,
+    i: Number,
   },
 }
 </script>

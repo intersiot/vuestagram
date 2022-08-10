@@ -1,7 +1,8 @@
 <template>
   <div>
     <div v-if="step == 0">
-      <Post :게시물="게시물" />
+      <!-- <Post :게시물="게시물" /> -->
+      <Post :게시물="$store.state.post[i]" v-for="(a, i) in $store.state.post" :key="i" :i="i"></Post>
     </div>
     <!--
       반복문 쓰는 방법.
@@ -38,7 +39,6 @@
 <script>
 import Post from './PostComponent.vue'
 import FilterBox from './FilterBoxComponent.vue'
-
 export default {
   name: 'ContainerComponent',
   data() {

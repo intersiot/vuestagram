@@ -10,21 +10,19 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-<!--
-  <h4>안녕 {{ $store.state.name }}</h4> store.js에 있는 state 꺼내쓰는 방법
+  <!-- <h4>안녕 {{ $store.state.name }}</h4> store.js에 있는 state 꺼내쓰는 방법
   <button @click="$store.state.name = '박' ">버튼</button> 이렇게 직접 수정하면 안됨! store.js에 부탁할거임
   <button @click="$store.commit('이름변경')">버튼</button>
   <h4>나이는 {{ $store.state.age }}</h4>
   <button @click="$store.commit('나이먹기')">버튼2</button>
-  <button @click="$store.commit('나이십씩먹기', 10)">버튼3</button> 10씩 증가시키고 싶다면?
--->
+  <button @click="$store.commit('나이십씩먹기', 10)">버튼3</button> 10씩 증가시키고 싶다면? -->
 
   <!-- 더보기게시물 ajax 요청하려면?
     commit은 mutations 부탁
     dispatch는 actions 부탁
    -->
-  <!-- <p>{{ $store.state.more }}</p>
-  <button @click="$store.dispatch('getData')">더보기버튼</button> -->
+  <!-- <p>{{ $store.state.more }}</p> -->
+  <button v-if="step == 0" @click="$store.dispatch('getData')">더보기버튼</button>
 
   <Container 
     :게시물="게시물" 
@@ -32,6 +30,12 @@
     :이미지url="이미지url" 
     @write="작성한글 = $event"
   />
+
+  <!-- vuex 예시 -->
+  <!-- <p>{{ Now() }} {{ 카운터 }}</p> -->
+  <!-- <p>{{ Now2 }} {{ 카운터 }}</p>
+  <button @click="카운터++">버튼</button>
+  <p>{{ name }}</p> -->
 
   <button v-if="step == 0" @click="more">더보기</button>
 
@@ -56,6 +60,7 @@ import Container from './components/ContainerComponent.vue'
 import post from './assets/post'
 import axios from 'axios' // axios로 ajax 요청하는 법
 // axios.get() // 내가 원하는 url로 get요청할 수 있음
+import {mapMutations, mapState} from 'vuex'
 
 export default {
   name: "App",
@@ -64,10 +69,11 @@ export default {
       선택한필터: '',
       작성한글: '',
       이미지url: '', // url 변수 등록
-      step: 0, // App.vue에 현재 페이지 상태를 저장함
+      step: 3, // App.vue에 현재 페이지 상태를 저장함
       // step: 0, // 0이면 내용 0을 보여주고 1이면 내용 1을 보여줌
       게시물: post, // 글 발행 기능 만들기 -> <Post />를 하나 더 만들려면? 데이터만 건들면 된다.
       더보기: 0,
+      카운터: 0,
     }
   },
   mounted() {
@@ -83,7 +89,22 @@ export default {
   components: {
     Container,
   },
-  methods: {
+
+  computed: { // 사용해도 실행되지 않음, 처음 실행하고 값을 간직함, 계산 결과 저장용 함수임
+    // Now2() { return new Date() },
+    // name() { return this.$store.state.name },
+    // vuex state 한번에 꺼내쓰려면? ...mapState(['state이름'])
+    ...mapState(['name', 'age', 'likes']),
+    // 오브젝트 자료형도 가능 ...mapState({작명: 'state이름'})
+    ...mapState({
+      작명: 'name',
+    }),
+  },
+
+  methods: { // 사용할때마다 실행됨
+    // Now() { return new Date() },
+    // vuex mutations 한번에 쓰려면? ...mapMutations(['함수명'])
+    ...mapMutations(['setMore', 'UpLike']),
     Publish() { // 발행버튼 누르면? this.게시물에 { 내가쓴거 } 밀어넣기
       var 내게시물 = {
         name: "Kim Hyun",

@@ -34,11 +34,18 @@
       </div>
     </div>
   </div>
+
+  <!-- 팔로워 목록 -->
+  <div v-if="step == 3">
+    <MyPage :one="1" />
+  </div>
 </template>
 
 <script>
 import Post from './PostComponent.vue'
 import FilterBox from './FilterBoxComponent.vue'
+import MyPage from './MyPageComponent.vue'
+
 export default {
   name: 'ContainerComponent',
   data() {
@@ -63,6 +70,7 @@ export default {
   components: {
     Post,
     FilterBox,
+    MyPage,
   },
 }
 </script>
